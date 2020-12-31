@@ -28,6 +28,7 @@ list(x=c("A", "B", "C", "A", "B"),
 
 
 
+
 ######벡터 생성######
 #c()는 인수로 주어진 벡터들을 서로 결합
 c(1,2,3,4,5,6,7,8,9,10)
@@ -78,6 +79,7 @@ pi
 month <- c(12,9,3,5,1)
 month.name[month]
 #[]는 인덱싱
+
 
 
 
@@ -156,6 +158,7 @@ food <- c("Pie", "Juice", "Cake")
 paste #문자열 붙여주기
 paste(fruit, food)
 paste(fruit, "Juice")
+
 
 
 ######벡터함수######
@@ -274,6 +277,7 @@ setdiff(p,q)   #차집합
 setequal(p,q)  #두 집합 같냐
 is.element(setdiff(p,q), p)  #첫번째 인수가 두번째 인수에 속했냐
 
+
 #######벡터인덱싱######
 #특정 위치의 원소 선택하기
 num <-  0:30
@@ -349,7 +353,7 @@ names(rainfall) <-  month.name
 traffic.death[traffic.death > 800]
 names(traffic.death[traffic.death > 800])
 
-#팩터####
+#######팩터####
 #요로케 하니까 스크립트 상에서 소제목?이 만들어지네용
 
 #범주형데이터 #Levels를 원소로 하는 백터
@@ -451,3 +455,185 @@ matrix(11:20, 5, 2)
 cbind(v1, v2, mt <- matrix(11:20, 5, 2))
 rbind(matrix(1:6, 2, 3), matrix(7:12, 2, 3))
 getwd()
+
+#######행렬 연산#######
+#행렬은 제가 몰라서 다음에...
+
+getwd()
+#######리스트#######
+#자료형태, 개수 상관 없이 담을 수 있음
+list(0.68, 0.95, 0.99, 
+     "Apple", 
+     c(2,3,4,5), 
+     matrix(1:6, ncol=3), 
+     mean(1:10))
+
+lst <- list()
+lst
+lst[[1]] <- 1.23
+names(lst) <- c("c1")
+length(lst)
+
+#리스트 결합
+c(lst1, list2)
+
+a <- list(1,2,3,4,5,6,7)
+a
+mean(a)         #벡터를 필요로 하는 함수
+mean(unlist(a)) #리스트를 해체해서 벡터로
+
+[[]] #원소(자료) 내 데이터값 추출
+[]   #원소(자료)를 추출
+
+product <- list("A", 30000, "Nice")
+product[[3]]
+product[3]
+class(product[[3]])
+class(product[3])
+
+#이름
+product <- list(id="A", 
+                price=30000, 
+                eval="Nice")
+product
+product$id
+product[["id"]]
+
+#원소 내용 바꾸기
+product[[2]] <- 40000
+product[["price"]] <- 40000
+product$price <- 40000
+product[2] <- 40000
+product
+#여러 값 할당할 때는 [[]]
+product[[2]] <- c(30000, 40000)
+product[2] <- list(c(30000, 40000))
+
+product[[5]] <- c("Domestic", "Export")
+product[5] <- list(c("Domestic", "Export"))
+
+product$madein <- c("Korea", "China")
+
+product
+
+#지울 때
+product[[5]] <- NULL
+
+
+######데이터프레임생성######
+#행렬+리스트
+v1 <- c("A", "B", "c")
+v2 <- c("MOuse", "Keyboard", "USB")
+v3 <- c(3000, 9000, 10000)
+data.frame(v1, v2, v3) #열이름 반드시 있어야 함
+products <- data.frame(row.names=v1, v2, v3) #행이름으로 쓰기
+
+data.frame(id=v1, name=v2, price=v3) #열이름 지정
+str(products)
+#문자데이터를 팩터로 변환
+# 인자로 stirngsAsFactors=F 하면 팩터로 변환 안됨
+
+
+#행렬을 데이타프레임으로
+mat <- matrix(c(1,3,5,7,9,
+              2,4,6,8,10,
+              2,3,5,7,11), ncol=3)
+mat
+number <- as.data.frame(mat)
+number
+#열이름 자동생성
+colnames(number) <- c("odd", "even", "prime")
+number
+
+#리스트를 데이타프레임으로
+v1 <- c("A", "B", "c")
+v2 <- c("MOuse", "Keyboard", "USB")
+v3 <- c(3000, 9000, 10000)
+lst <- list(v1, v2, v3)
+lst
+product_datafrm <- as.data.frame(lst)
+colnames(product_datafrm) <- c("id", "name", "price")
+product_datafrm
+
+nrow(product_datafrm)
+ncol(product_datafrm)
+length(product_datafrm)
+
+######데이터확장######
+id <- c("A", "B", "c")
+name <- c("MOuse", "Keyboard", "USB")
+price <- c(3000, 9000, 10000)
+product <- data.frame(id, name, price,
+                      stringsAsFactors = F)
+product
+#행방향확장
+rbind(product,
+      c("D", "Monitor", 250000))
+rbind(product,
+      new_rows)
+#열방향확장
+cbind(product,
+      madein=c("KOR", "CHI", "USA", "KOR", "KOR", "USA"))
+cbind(product,
+      new_cols)
+
+#####날짜#####
+Sys.Date()
+date()
+Sys.time()
+
+class(Sys.Date())
+
+#텍스트를 날짜로
+as.Date("2020-12-31") 
+YYYY-MM-DD 
+YYYY/MM/DD
+as.Date("12/31/2020", format("%m/%d/%y"))
+?strptime
+
+today <- Sys.Date()
+format(today, format="%Y/%m/%d/%A")
+
+weekdays(today)
+someday <- today + 100
+format(someday, format="%A")
+      
+start <- as.Date("2020-12-31")
+end <- as.Date("2021-01-31")
+seq(start, end, 2)
+seq(start, by=2, length.out=7)
+seq(start, by="week", length.out=7)
+seq(from=as.Date("2021-01-01"), by="3 months", length.out=4) #분기
+
+months(start)
+quarters(start)
+
+#locale환경
+Sys.getlocale()
+LC_TIME=Korean_Korea.949 
+Sys.setlocale("LC_TIME", "C") #북미표준
+weekdays(today)
+Sys.setlocale() #다시 원래대로
+
+#시간정보 포함
+pct <- as.POSIXct("2021/03/26, 16:00:01",
+                  format="%Y/%m/%d, %H:%M:%S")
+pct
+plt <- as.POSIXlt("2021/03/26, 16:00:01",
+                  format="%Y/%m/%d, %H:%M:%S")
+plt
+class(plt)
+unclass(plt)
+as.POSIXlt(as.Date("2021-03-26"))
+as.POSIXlt(as.Date("2021-03-26"))$wday
+as.POSIXlt(as.Date("2021-03-26"))$yday
+as.POSIXlt(as.Date("2021-03-26"))$year + 1900
+as.POSIXlt(as.Date("2021-03-26"))$mon + 1
+
+strptime("2021-03-26", format="%Y-%m-%d")
+
+y <- 2020
+m <- 12
+d <- 31
+ISOdate(y, m, d) #날짜개체로
+
