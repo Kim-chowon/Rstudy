@@ -589,14 +589,15 @@ class(Sys.Date())
 as.Date("2020-12-31") 
 YYYY-MM-DD 
 YYYY/MM/DD
-as.Date("12/31/2020", format("%m/%d/%y"))
+as.Date("12/31/2020", format("%m/%d/%Y"))
 ?strptime
 
 today <- Sys.Date()
-format(today, format="%Y/%m/%d/%A")
+format(today, format="%y/%m/%d/%a") # 포맷 지정하는 내용 ?sprttime
 
 weekdays(today)
 someday <- today + 100
+someday
 format(someday, format="%A")
       
 start <- as.Date("2020-12-31")
@@ -621,7 +622,7 @@ pct <- as.POSIXct("2021/03/26, 16:00:01",
                   format="%Y/%m/%d, %H:%M:%S")
 pct
 plt <- as.POSIXlt("2021/03/26, 16:00:01",
-                  format="%Y/%m/%d, %H:%M:%S")
+                  format="%Y/%m/%d, %H:%M:%S") # 정보가 리스트형식으로 지정되어 있음. ct는 프린트 형식으로 보여주기만 함
 plt
 class(plt)
 unclass(plt)
