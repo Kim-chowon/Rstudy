@@ -1,3 +1,5 @@
+getwd()
+setwd(C:/Users/user/Documents/R projects/Rstudy)
 Chowon <- "Gradstudent"
 print(c("Chowon is", Chowon))
 Target <- Chowon
@@ -5,7 +7,8 @@ x <- if(Target == "Gradstudent"){
   print("사람아님")} else {
     print("사람")
   }
-if
+
+if(
 
 if(#조건)(#조건이 트루일 때) else(#조건이 거짓일 때)
 
@@ -66,3 +69,4 @@ SW %>% class()
 
 state.x77
 st <- data.frame
+

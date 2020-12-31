@@ -227,6 +227,7 @@ is.na(NaN)
 
 #8강 25분까지 봤음
 
+<<<<<<< HEAD
 #벡터 원소 전체를 대상으로 하는 함수
 z <- 1:5
 sum(z)
@@ -637,3 +638,10 @@ m <- 12
 d <- 31
 ISOdate(y, m, d) #날짜개체로
 
+=======
+###
+
+getwd()
+?setwd
+setwd("C:/Users/user/Documents/R projects/Rstudy")
+>>>>>>> 8c846bf13318757ba402f1e404e4e9b3ebd01d8e
