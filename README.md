@@ -28,7 +28,7 @@ Click[here](https://www.youtube.com/watch?v=kMEb_BzyUqk)
 ![image description](https://www.10wallpaper.com/wallpaper/1366x768/1209/Cute_Pug-dog_photo_wallpaper_1366x768.jpg)
 
 |Header|Description|
-|:--|--:|  #왼쪽정렬 오른쪽정렬
+|:--|--:| 
 |Cell1|Cell2|
 |Cell1|Cell2|
 |Cell1|Cell2|
