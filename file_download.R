@@ -1,5 +1,5 @@
-library(tidyverse)
-library(rvest)
+#파일 다운로드해서 텍스트로 읽어오기
+#웹스크래핑
 
 url <- "https://www.gutenberg.org/files/11/11-0.txt"
 
