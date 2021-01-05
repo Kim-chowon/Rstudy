@@ -11,6 +11,7 @@ ___
 This is my **first** .md file.
 R is so *useful*.
 ~strikethrough~
+___이거뭐지___
 
 > This is Quote 
 
@@ -40,3 +41,4 @@ Click[here](https://www.youtube.com/watch?v=kMEb_BzyUqk)
 rm(), list()
 ```
 
+setwd()

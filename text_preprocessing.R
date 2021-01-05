@@ -7,6 +7,7 @@ prince2 <- "What makes the desert beautiful is that somewhere it hides a well"
 txt <- "Data Analytics is useful. Data Analytics is also interesting"
 words <- c()
 words2 <- 
+
 x <- "We have a dream"
 x
 nchar(x) #텍스트의 문자의 개수(공백포함)
@@ -21,25 +22,27 @@ sort() #텍스트의 틀을 정렬
 letters
 sort(letters, decreasing=T)
 
-tolower() #모두 소문자로
-toupper() #모두 대문자로
+tolower(LETTERS) #모두 소문자로
+toupper(letters) #모두 대문자로
 
 strsplit(x, split=" ") #텍스트 분할, 리스트 형식으로 출력 
-unlist(strsplit(x, split=" "))
-I.said <- unlist(strsplit(x, split=" "))
-
-paste()    #텍스트 결합
 ","
 ""
 ":" 
 "\t"
+unlist(strsplit(x, split=" "))
+I.said <- unlist(strsplit(x, split=" "))
+I.said
+
+paste()    #텍스트 결합
 
 prince1 <- "You come at four in the afternoon, the at three I shall begin to be happy"
-pirnce2 <- "One runs the risk of weeping a little, if one lets himself be tamed"
-prince3 <- "What makes the desert beautiful is that somewhere it hides a well"
+prince2 <- "One runs the risk of weeping a little, if one lets himself be tamed"
+prince3 <- "What makes the desert beautiful is that somewhere it hides a well well"
 littleprince <- c(prince1, prince2, prince3)
 strsplit(littleprince, " ")
 #리스트구조
+
 strsplit(littleprince, " ") [[3]]
 strsplit(littleprince, " ") [[3]][[5]]
 
@@ -48,7 +51,7 @@ tolower(strsplit(littleprince, " ") [[3]])
 unique(tolower(strsplit(littleprince, " ") [[3]]))
 
 paste("Everybody", "wants", "to", "fly")
-paste("Everybody", "wants", "to", "fly", sep="-")
+paste("Everybody", "wants", "to", "fly", sep="")
 paste0("Everybody", "wants", "to", "fly")
 
 paste("Type", 1:5)
@@ -62,9 +65,11 @@ asian.countries <- c("Korea", "Japan", "China")
 info <- c("GDP", "Population", "Area")
 outer(asian.countries, info)
 outer(asian.countries, info, FUN=paste, sep="-")
-as.vector()
+as.vector(outer(asian.countries, info, FUN=paste, sep="-")
+)
 
 x <-  outer(asian.countries, info, FUN=paste, sep="-")
+x
 x[!lower.tri(x)] #대각선의 아랫부분의 반대만  추출
                  #중복 제거
 
@@ -72,8 +77,10 @@ sprintf() #변수와 텍스트를 섞어 쓰기 좋음
 customer <- "Chowon"
 buysize <- 10
 deliveryday <- 3
+
 paste("Hello,", customer, ", your order of", buysize, "product(s) will be delivered within", deliveryday, "day(s)", 
       sep=" ")
+
 sprintf("Hello %s your order of %s product(s) will be delivered within %s day(s)",
         customer, buysize, deliveryday,
         sep=" ")

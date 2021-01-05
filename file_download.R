@@ -1,5 +1,5 @@
 #파일 다운로드해서 텍스트로 읽어오기
-#웹스크래핑
+#웹 스크래핑
 
 url <- "https://www.gutenberg.org/files/11/11-0.txt"
 
@@ -9,8 +9,10 @@ alice <- readLines(url, n=100, encoding="UTF-8")
 
 #단어 단위로 #라인으로 만들고 싶으면 paste
 scan()
+
 one.line <- scan(url, what=character(), skip=55,
                  nlines=1, encoding="UTF-8")
+one.line
 paste(one.line, collapse=" ")
 
 #루프

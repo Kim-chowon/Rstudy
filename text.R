@@ -13,7 +13,7 @@ string <- c("data anlaytics is useful",
 grep(pattern="data", x=string, value = T)
 string[grep(pattern="data", x=string)]
 
-grep("useful|helpful", string, valueg=T,
+grep("useful|helpful", string, value=T,
      invert=T) 
 
 grepl() #l은 logic을 의미, 논리값 출력
@@ -34,3 +34,12 @@ gregexpr(pattern="data", text=string) #리스트 형식
 
 regmatches() #패턴추출
 regmatches(x=string, m=gregexpr("data", string)) #위치정보와 길이정보
+
+sub(pattern="data", replacement="text", x=string)
+gsub("data", "text", x=string)
+
+strsplit(x=string, split=" ") #리스트구조
+unlist(strsplit(x=string, split=" "))
+unique(unlist(strsplit(x=string, split=" ")))
+       
+       
