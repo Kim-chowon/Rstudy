@@ -50,7 +50,7 @@ while (i <= 25) {
 
 for #for문의 형식: (var in list) statement
 for (i in seq(5,25,5)) print(i)
-# for루프 내에서 생성된 객체(var)는 함수가 종료되어도 사라지지 않는다
+# for루프 내에서 생성된 객체는 함수가 종료되어도 사라지지 않는다
 i <- 1
-for (i in seq(5,25,5)) i
+for (i in seq(5,25,5)) i 
 i

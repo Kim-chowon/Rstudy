@@ -20,7 +20,7 @@ nchar(y[4])
 
 sort() #텍스트의 틀을 정렬
 letters
-sort(letters, decreasing=T)
+sort(letters, decreasing=F)
 
 tolower(LETTERS) #모두 소문자로
 toupper(letters) #모두 대문자로
@@ -51,13 +51,13 @@ tolower(strsplit(littleprince, " ") [[3]])
 unique(tolower(strsplit(littleprince, " ") [[3]]))
 
 paste("Everybody", "wants", "to", "fly")
-paste("Everybody", "wants", "to", "fly", sep="")
+paste("Everybody", "wants", "to", "fly", sep=",")
 paste0("Everybody", "wants", "to", "fly")
 
 paste("Type", 1:5)
 
 heroes <- c("Batman", "Superman", "Spiderman")
-paste(heroes, "wants", "to", "fly", collapse = ", and ") #결합된 원ㅗ들 결합
+paste(heroes, "wants", "to", "fly", collapse = ", and ") #결합된 원소들 결합해서 하나의 원소소로
 
 outer() #모든 가능한 조합을 행렬로 #기본은 곱하기
 outer(c(1,2,3), c(1,2,3))
@@ -118,7 +118,7 @@ gsub()
 txt <- "Data Analytics is useful. Data Analytics is also interesting"
 
 sub(pattern="Data", replacement="Business", x=txt)
-gsub("Data", "Business", txt)
+txt2 <- gsub("Data", "Business", txt)
 
 #패턴인수 
 #정규 표현식: 특정한 규칙을 갖는 문자열 패턴을 표현하는 방법
@@ -149,7 +149,7 @@ gsub("Data", "Business", txt)
 \S #스페이스 문자를 제외한 문자
 \b #단어 양쪽 끝의 빈 문자열
 \B #단어 양쪽 끝을 제외한 빈 문자열
-\< #단어 시작
+\< #단어 시작 
 \> #단어 끝
   
 words <- c("a,

@@ -18,7 +18,7 @@ y
 
 apply(y, 1, paste) 
 apply(y, 1, paste, collapse=",") # 행에 대하여 # FUN인자 다음에 인자 입력
-apply(y, 2, paste, collapse=",") # 행에 대하여 
+apply(y, 2, paste, collapse=",") # 열에 대하여 
 apply(y, 3, paste, collapse=",") # 테이블에 대하여
 
 apply(y, c(1,2), paste, collapse=",") # 1차원(행)과 2차원(열)이 교차하는 값에 paste()적용
@@ -28,6 +28,7 @@ apply(y, c(1,2,3), paste, collapse=",")
 # 문자로 인식되네 -> 숫자로 바꾸려면?
 str(pst)
 pst <- apply(y, 1, paste, collapse=",")
+pst
 as.numeric(pst)
 # 안바뀌네..
 # 중간에 , 있어서 그럼
@@ -42,6 +43,7 @@ str(npst)
 
 Titanic
 str(Titanic)   #, , $를 보면 차원을 알 수 있다        
+as.numeric(npst)
 
 apply(Titanic, 1, sum)
 apply(Titanic, 4, sum) 

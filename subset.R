@@ -39,11 +39,13 @@ subset(iris,
        select = c("Sepal.Width", "Species"),# 출력할 열 지정
 )
 
+
 #### 랜덤 샘플 추출 #### 
 sample(x=1:10, size=5) # 비복원추출
 sample(1:10, 5, replace = T) # 복원추출
 
-sample(10) # 무작위 순열
+a <- sample(20) # 무작위 순열
+a
 
 # 랜덤샘플을 동일하게
 # 난수생성 초기값 지정하면 된다
@@ -115,7 +117,7 @@ iris.cut <- cut(x=iris$Sepal.Width, breaks=c(5))
 table(iris.cut)
 summary(iris.cut)
 
-cut(x=iris$Sepal.Width, 
+iris.cut <- cut(x=iris$Sepal.Width, 
     breaks=c(0,1,2,3,4,5),
     labels=c("Smaller", "Small", "Medium", "Big", "Bigger"))
 table(iris.cut)

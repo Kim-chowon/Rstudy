@@ -77,6 +77,9 @@ transLength <- function(x, mult=0.9144, unit="m", FUN=round, ...){
 }
 
 # 어제 했던
+outer(c(1,2,3), c(1,2,3))
+asian.countries <- c("Korea", "Japan", "China")
+info <- c("GDP", "Population", "Area")
 outer(asian.countries, info, FUN=paste, sep="-")
 
 # 함수 내의 인수는 함수가 종료되면 작업공간에서 사라진다
@@ -87,13 +90,16 @@ ls()
 
 #### 로컬환경과 글로벌환경 ####
 x <- 11:15
+# 아무 것도 안나와야 정상인 함수
 scopetest <- function(x) {
   cat("This is x: ", x, "\n")
   rm(x) #x를 작업공간에서 제거했음
   cat("This is x after removing x", x, "\n")
 }
 
-scopetest(x=15:11)
+scopetest(x)
+
+scopetest(x=15)
 # 로컬환경에서 인수를 먼저 찾는다.
 # 15:11 x가 정상적으로 출력된 후, x를 작업공간에서 제거하자, 로컬환경의 x인수는 더이상 없다. 
 # 로컬환경에 인수가 없으니 글로벌 환경에서 찾는다. 그러면 11:15가 출력된다. 

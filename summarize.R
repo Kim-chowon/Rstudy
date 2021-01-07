@@ -5,6 +5,7 @@
 head(mtcars)
 str(mtcars)
 
+?within
 mtcars <- within(mtcars,
                  am <- factor(am,
                               levels=c(0,1),
@@ -12,10 +13,11 @@ mtcars <- within(mtcars,
 str(mtcars)
 attach(mtcars)
 
-#auto / manual 별로 연비변수를 분할
+#auto / manual 별로 연비 변수를 분할
 split(x=mpg, f=am)
 g <- split(x=mpg, f=am)
-g[[1]]
+g
+g[[2]]
 g[["Manual"]]
 sapply(g, mean)
 
@@ -27,6 +29,7 @@ detach(mtcars)
 
 attach(iris)
 gg <- unstack(data.frame(Sepal.Length, Species))
+gg
 head(gg) # Species가 열이 됨
 str(gg)
 summary(gg)
@@ -57,10 +60,11 @@ aggregate(iris[1:4], list(Species=iris$Species), mean)
 
 #### by() ####
 # 데이터 프레임을 통쨰로 집어넣기
+?by
 by(iris, iris$Species, FUN=summary)
 
 #### table() ####
-# 범주형 변수 별로 원소 몇개인지 보기
+# 범주형 변 수 별로 원소 몇개인지 보기
 table(gear, am, cyl)
 # 연속형 변수는 안돼요
 # 구간으로 만들어서 하면 돼요
