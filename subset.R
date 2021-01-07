@@ -14,14 +14,14 @@ $ # 데이터셋의 하나의 원소 추출
 # 리스트 인덱싱
 str(mtcars)
 mtcars$mpg
-mtcars[["mpg"]]
-mtcars["mpg"]
+mtcars[["mpg"]] #벡터가 그대로 나놈
+mtcars["mpg"] # 리스트 형식으로 나옴 
 mtcars[c(1,4)]
-mtcars[-c(2:10)] #음과 양 한번에 사용 못함
+mtcars[-c(2:10)] #음과 양 한번에 사용 못함 / 2부터 10까지 빼고 나머지는 다 보여주어라. 
 
 # 행렬 인덱싱
 str(iris)
-iris[1:5, ] # 처음 다섯개의 행 데이터프레임 추출
+iris[1:5, ] # 처음 다섯개의 행 데이터프레임 추출 / 행-열 순서로 입력하는 것 
 iris[, c("Sepal.Length", "Sepal.Width")]
 iris[, "Sepal.Length"] # 열을 하나만 추출할 경우에 벡터형식으로 나온다
 iris[, "Sepal.Length", drop=F] # 원래 구조 유지
@@ -43,7 +43,7 @@ subset(iris,
 sample(x=1:10, size=5) # 비복원추출
 sample(1:10, 5, replace = T) # 복원추출
 
-sample(10) # 무작위 순열
+sample(10) # 무작위 순열, 순서를 무작위로 바꾸라
 
 # 랜덤샘플을 동일하게
 # 난수생성 초기값 지정하면 된다

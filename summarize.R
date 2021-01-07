@@ -29,10 +29,10 @@ attach(iris)
 gg <- unstack(data.frame(Sepal.Length, Species))
 head(gg) # Species가 열이 됨
 str(gg)
-summary(gg)
-
+summary(gg) # 데아터 프레임에만 적용할 수 있음
+ 
 #### 분할과 연산_tapply(), aggregate() ####
-tapply(x=벡터, INDEX=팩터, FUN)
+tapply(x=벡터, INDEX=팩터, FUN) # FUN은 function
 
 tapply(Sepal.Length, Species, mean)
 detach(iris)
