@@ -14,14 +14,16 @@ air1 <- filter(airquality, Month == 6)
 head(air1)
 # 이미 배웠던 걸로도 가능
 air2 <- airquality[airquality$Month==6, ]
+air2
 air2 <- subset(airquality, subset=(Month==6)) 
 head(air2)
-# filter()는 인자를 간단하게 쓴다. 그리고 행번호를 바꿔준다
+
+# filter()는 인자를 간단하게 쓴다. 그리고 행번호를 바꿔준다. 더욱 쉽다. 
 
 # and = &, ,
 # or = |
 air <- filter(airquality, Month==6 & Temp > 90)
-air <- filter(airquality, Month==6, Temp > 90)
+air <- filter(airquality, Month==6, Temp > 90) #,를 써도 그리고가 된다. 
 air
 air <- filter(airquality, Ozone > 80 | Temp > 90)
 air
@@ -33,12 +35,12 @@ airquality[6:10, ]
 # slice()는 행번호를 바꿔준다
 
 slice(airquality, n())  #n()는 행의 개수(=마지막 행번호)
-slice(airquality, (n()-4):n())
+slice(airquality, (n()-4):n()) # 마지막 행에서 5번째까지 포함하는 것을 추출하여라. 
 
 #### arrange() ####
 # 지정한 열을 기준으로 오름차순 행 소팅
 arrange(airquality, Temp, Month, Day) # Temp -> Month -> Day 순으로 동률 처리
-arrange(airquality, desc(Temp), Month, Day) # Temp만 내림차순
+arrange(airquality, desc(Temp), Month, Day) # Temp를 내림차순, 나머지를 오름차순으로 처리하라. 
 
 #### select() ####
 # 열 추출 / 열 입력
@@ -47,7 +49,7 @@ air1 <- select(airquality, Temp:Day)
 air1 <- select(airquality, -(Temp:Day)) 
 str(airquality)
 air2 <- airquality[, c("Month", "Day", "Temp")]
-air2 <- airquality[, c("Temp":"Month")]
+air2 <- airquality[, c("Temp":"Month")] # 인덱싱은 한번에 여러개의 열을 추출 못한다. 열의 번호를 알아야 한다. 
 air2 <- airquality[, 4:6]
 head(air1)
 head(air2)
@@ -64,9 +66,9 @@ head(air)
 
 #### distinct() ####
 # 특정 열에 포함된 중복되지 않은 값들 추출
-distinct(select(airquality, Month))
-distinct(airquality$Month)
-unique(airquality$Month)
+distinct(select(airquality, Month)) # 데이터 프레임으로 나옴
+distinct(airquality$Month) # 안나옴 
+unique(airquality$Month) # 숫자 벡터로 나옴
 
 #### matate() ####
 # 기존 데이터 프레임의 열(변수)를 이용해서 새로운 열 생성
@@ -77,7 +79,7 @@ head(air1)
 
 # transform()이랑 비슷
 air2 <- transform(airquality,
-          Temp.C=(Temp-32)/1.8,     # 섭씨변수 추가
+          Temp.C=(Temp-32)/1.8,     # 섭씨변수 추가 (동시에 여려개의 변수를 만들기 어려움, 함수안에서 새로 만들 수 있음)
           Diff=Temp.C-mean(Temp.C))
 air2 <- transform(airquality,
                   Temp.C=(Temp-32)/1.8)
@@ -136,21 +138,31 @@ air.group
 # "Groups:   Month [5]" Month의 레벨별로 그룹화 되어있다는 뜻
 
 summarise(air.group, 
-          Mean.Temp=mean(Temp, na.rm=T),
+          Mean.Temp=mean(Temp, na.rm=T), 
           SD.Temp=sd(Temp, na.rm=T),
           Days=n())
 
+library(psych)
+describe(airquality)
+
 #### %>% 파이프연산자 ####
+library(tidyverse) # 가장 상위 차원의 패키지 / dplyr, magrittr 설치 안해도 됨
+
 library(dplyr)
-library(magrittr)
+library(magrittr) 
+
 # 한 함수의 출력 결과 또는 데이터를 다음 함수의 첫번째 인수로 전달
 # 윈도우 Shift + Ctrl +M
 # 맥 Shift + Cmd + M
+
 iris
+
 str(iris)
+
 iris %>%  head
 head(iris)
 1:10 %>% mean
+
 # 첫번째 인수로 데이터프레임을 갖는 함수들에 적용하면 편함
 a1 <- select(airquality, Ozone, Temp, Month)
 a2 <- group_by(a1, Month)
@@ -158,6 +170,7 @@ a3 <- summarise(a2,
                 Mean.Ozone=mean(Ozone, na.rm=T),
                 Mean.Temp=mean(Temp, na.rm=T))
 a4 <- filter(a3, Mean.Ozone > 40 | Mean.Temp > 80)                 
+
 
 air <- airquality %>% 
   select(Ozone, Temp, Month) %>% 
