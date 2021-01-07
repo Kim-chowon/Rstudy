@@ -64,7 +64,7 @@ outer(c(1,2,3), c(1,2,3))
 asian.countries <- c("Korea", "Japan", "China")
 info <- c("GDP", "Population", "Area")
 outer(asian.countries, info)
-outer(asian.countries, info, FUN=paste, sep="-")
+outer(asian.countries, info, FUN=paste, sep="-") #fun을 넣어야 한다. 
 as.vector(outer(asian.countries, info, FUN=paste, sep="-")
 )
 
@@ -94,7 +94,7 @@ sprintf("Hello %s, your midterm score is %s and you have to do %s homework(s)",
 
 substr() #문자열의 부분집합
 substr("Data Analytics", start=1, stop=4)
-substr("Data Analytics", start=6, stop=nchar("Data Analytics"))
+substr("Data Analytics", start=6, stop=nchar("Data Analytics")) # 공백도 문자열로 인식한다. 
 substring("Data Analytics", 6)
 
 class <- c("Data Analytics", "Data Mining", "Data Visualization")
@@ -104,7 +104,7 @@ substr(class, 1, c(4, 5, 6))
 grep() #특정 문자열 포함하는 텍스트 찾기
 islands
 grep(pattern="New", x=islands) #안나옴
-str(islands)
+str(islands) # 왜냐하면 숫자로 인식되어 있기 때문에, 안나온다. 이름을 읽으라고 해야 한다. 
 
 landmasses <- names(islands)
 grep(pattern="New", x=landmasses)
@@ -113,12 +113,16 @@ landmasses[grep(pattern="New", x=landmasses)]
 grep(pattern="New", x=landmasses, value=T)
 
 #찾아 바꾸기
-sub()
-gsub()
+sub() # 최초로 나오는 하나만 바꾸기
+gsub()  # 모두 바꾸기 
 txt <- "Data Analytics is useful. Data Analytics is also interesting"
 
 sub(pattern="Data", replacement="Business", x=txt)
+<<<<<<< HEAD
 txt2 <- gsub("Data", "Business", txt)
+=======
+gsub("Data", "Business", txt) # 되돌리는 것은 원래 텍스트를 불러오면 될 것 같음
+>>>>>>> 0cbb348afd344f08398cac64556823b8861a08a9
 
 #패턴인수 
 #정규 표현식: 특정한 규칙을 갖는 문자열 패턴을 표현하는 방법
