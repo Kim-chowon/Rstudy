@@ -55,7 +55,7 @@ melt(
 )
 
 smiths
-
+library(tidyverse)
 smiths.long <- smiths %>% melt(id.vars = "subject",
      measure.vars = c(2:5),
      variable.name = "var",
@@ -70,7 +70,7 @@ smiths.long <- smiths %>% melt(
 )
 
 smiths.long
-
+melt(smiths)
 #### dcast() ####
 dcast(smiths.long)
 ?dcast
@@ -97,6 +97,7 @@ head(airquality)
 aq.long <- melt(airquality, 
                 id.vars = c("Month", "Day"))
 head(aq.long)
+tail(aq.long)
 
 aq.wide <- dcast(aq.long,
                  Month + Day ~ variable,
