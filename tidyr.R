@@ -88,5 +88,5 @@ unite(data,
 iris.unite <- unite(iris.sep,
                     col=Factor,
                     Part, Measures,
-                    sep="_")
+                    sep=" ")
 head(iris.unite)

@@ -71,6 +71,7 @@ smiths.long <- smiths %>% melt(
 
 smiths.long
 melt(smiths)
+
 #### dcast() ####
 dcast(smiths.long)
 ?dcast
@@ -103,7 +104,7 @@ aq.wide <- dcast(aq.long,
                  Month + Day ~ variable,
                  value.var = "value")
 head(aq.wide)
-
+airquality
 
 # 포맷변환시 하나의 셀에 여러개의 값이 들어가는 문제 나타날 수 있다
 # 식별자변수 똑같은거 여러개일 경우
@@ -115,3 +116,8 @@ dcast(aq.long, Month ~ variable,
       fun.aggregate=mean, na.rm=T)
 
 
+library(reshape2)
+rma <- fread('C:\\Users\\user\\Documents\\R projects\\Rstudy_Lee\\ch09\\Ch0902.RMA.csv')
+rma <- as.data.frame(rma)
+rma.wide <- reshape2::dcast(rma, id ~ time)
+str(rma.wide)
