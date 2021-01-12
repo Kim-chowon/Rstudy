@@ -24,12 +24,14 @@ inspect(basket.trans)
 basket.apriori <- apriori(basket.trans, parameter= list(support=0.1,
                                       confidence=0.8))
 inspect(basket.apriori)
-?apriori
+
 # lhs = 조건
 # rhs = 결과
 # count = 연관성 규칙이 발생한 건수
 
 # 향상도가 1.2 이상이 데이터 확인
+str(basket.apriori)
+library(tidyverse)
 subset(basket.apriori, subset = lift > 1.2) %>% inspect # 행의조건
 
 # 조건에 삼겹살이 포함된 연관성 규칙
