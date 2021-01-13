@@ -7,8 +7,8 @@ apple
 
 str(apple)
 
-boxplot(weight ~ model, data = apple)
-# 품종별 무게분포를 살펴본 결과, 로얄후지와 미시마는 다른 것들과 차이를 보인다
+  boxplot(weight ~ model, data = apple)
+  # 품종별 무게분포를 살펴본 결과, 로얄후지와 미시마는 다른 것들과 차이를 보인다
 # 무게로는 로얄후지와 미시마의 차이가 불분명하다
 boxplot(sugar ~ model, data = apple)
 # 품종별 당도분포를 살펴본 결과, 무게분포보다 품종별 차이가 뚜렷하지 않으나,
