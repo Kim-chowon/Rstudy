@@ -8,7 +8,8 @@
 # 삼겹살에 대한 지지도가 0.4라면 {삼겹살,생수}, {삼겹살,사과}에 대한 지지도는 아무리 높아도 0.4를 넘지 못할 것이다 
 rm(list=ls())
 
-install.packages("arules")
+# 1. 전처리
+# install.packages("arules")
 library(arules)
 basket <- readLines("basket.csv") # 라인단위로 읽어오기
 basket
@@ -20,6 +21,7 @@ basket.trans
 
 inspect(basket.trans)
 
+# 2. 연관성 규칙 도출
 # 연관성 규칙 도출(지지도0.1 이상, 신뢰도 0.8 이상인 연관성 규칙만 도출)
 basket.apriori <- apriori(basket.trans, parameter= list(support=0.1,
                                       confidence=0.8))
@@ -29,7 +31,7 @@ inspect(basket.apriori)
 # rhs = 결과
 # count = 연관성 규칙이 발생한 건수
 
-# 향상도가 1.2 이상이 데이터 확인
+# 향상도가 1.2 이상인 데이터 확인
 str(basket.apriori)
 library(tidyverse)
 subset(basket.apriori, subset = lift > 1.2) %>% inspect # 행의조건
