@@ -4,4 +4,28 @@
 - 모델 평가는 응집도(cohesion), 분리도(separation) 척도를 사용
 - 군집 내 응집도를 최대화하고 군집 간 분리도를 최대화
 
-clustering.image["https://t1.daumcdn.net/cfile/tistory/260B7B3C57528B402A"]
+![clustering.image]("https://t1.daumcdn.net/cfile/tistory/260B7B3C57528B402A")
+
+# k-평균 군집분석 : 분할적 군집분석
+- k평균 알고리즘은 아래 두 가지 기준을 만족하는 최적의 해를 찾는 것
+1. 군집 내 거리 최소회 : 군집 내 중심과 해당 군집의 객체 간 거리를 최소화한다
+2. 군집 간 거리 최대화 :  각 군집의 중심 간 거리를 최대화한다.
+- 유사도는 보통 유클리드거리 혹은 유클리드 제곱거리를 사용한다.
+- 노이즈나 이상치에 민감하다는 단점
+- 여러 변수들의 단위가 다르면 사전에 표준화해야 함. z값 ('scale()')
+
+
+# 분석단계
+> 1. K개의 centroids를 선택한다(k개의 행을 무작위로 선택)   
+> 2. 각 데이터를 가장 가까운 cluster centroid에 할당한다(군집 중심)   
+> 3. 각 군집에 속한 모든 데이터의 평균으로 cluster centroid를 다시 계산한다.   
+> 4. 각 데이터를 가장 가까운 centroid에 다시 할당한다.   
+> 5. 새로운 cluster centroids를 계산한다.    
+
+> 매번의 반복 마다 군집의 중심이 새로 계산되고, 새로 바뀐 중심과 각 객체간 거리가 다시 계산되면서 군집이 계속 동적으로 바뀌다가 더 이상 변동이 없이 수렴될 때까지 반복
+!
+![K-means Clustering](https://t1.daumcdn.net/cfile/tistory/2649913A57A572321D)
+
+
+
+
