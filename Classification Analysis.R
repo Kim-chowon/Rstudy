@@ -7,7 +7,7 @@ apple
 
 str(apple)
 
-  boxplot(weight ~ model, data = apple)
+boxplot(weight ~ model, data = apple)
   # 품종별 무게분포를 살펴본 결과, 로얄후지와 미시마는 다른 것들과 차이를 보인다
 # 무게로는 로얄후지와 미시마의 차이가 불분명하다
 boxplot(sugar ~ model, data = apple)
@@ -29,6 +29,9 @@ install.packages("caret")
 library(caret)
 
 ?createDataPartition
+
+set.seed(1)
+
 apple.index <- createDataPartition(apple$model, p=0.8, list=F) 
 # 컴퓨터가 랜덤으로(실행마다 다르게 나올 수 있음)
 # Y: 예측해야 하는 것 (사과 품종)
@@ -38,7 +41,7 @@ apple.index
 # 훈련데이터로 지정할 데이터의 인덱스들
 
 apple.train <- apple[apple.index, ]
-apple.test <- apple[-apple.index, ]
+apple.test <- apple[-apple.index, ] # 사과 인덱스에 빠진 것. 
 
 nrow(apple.train) # 학습
 nrow(apple.test)  # 평가
