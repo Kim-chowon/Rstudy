@@ -7,8 +7,13 @@ apple
 
 str(apple)
 
+<<<<<<< HEAD
 boxplot(weight ~ model, data = apple)
   # 품종별 무게분포를 살펴본 결과, 로얄후지와 미시마는 다른 것들과 차이를 보인다
+=======
+  boxplot(weight ~ model, data = apple)
+# 품종별 무게분포를 살펴본 결과, 로얄후지와 미시마는 다른 것들과 차이를 보인다
+>>>>>>> d9d9828a5499b8038826c2c7bfb0bff30cf5d1c5
 # 무게로는 로얄후지와 미시마의 차이가 불분명하다
 boxplot(sugar ~ model, data = apple)
 # 품종별 당도분포를 살펴본 결과, 무게분포보다 품종별 차이가 뚜렷하지 않으나,
@@ -29,9 +34,13 @@ install.packages("caret")
 library(caret)
 
 ?createDataPartition
+<<<<<<< HEAD
 
 set.seed(1)
 
+=======
+set.seed(1)
+>>>>>>> d9d9828a5499b8038826c2c7bfb0bff30cf5d1c5
 apple.index <- createDataPartition(apple$model, p=0.8, list=F) 
 # 컴퓨터가 랜덤으로(실행마다 다르게 나올 수 있음)
 # Y: 예측해야 하는 것 (사과 품종)
@@ -47,7 +56,7 @@ nrow(apple.train) # 학습
 nrow(apple.test)  # 평가
 
 # 2. 분류분석 실행하기 ####
-install.packages("rpart")
+# install.packages("rpart")
 library(rpart)
 
 apple.model <- rpart(model ~ .,
@@ -59,7 +68,7 @@ apple.model <- rpart(model ~ .,
 apple.model
 
 # 3. 모델 시각화 ####
-install.packages("rpart.plot")
+# install.packages("rpart.plot")
 library(rpart.plot)
 rpart.plot(apple.model)
 
@@ -93,6 +102,7 @@ apple.predict
 # 6. 모델 평가하기 (Kappa지수) ####
 # 보통 0.4~0.6 적당
 actual <- apple.test$model
+str(actual)
 
 # 혼동행렬을 만들어서 실제test데이터의 품종과 predict데이터의 품종이 얼마나 일치하는지 확인
 

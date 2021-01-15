@@ -69,7 +69,7 @@ as.vector(outer(asian.countries, info, FUN=paste, sep="-")
 )
 
 x <-  outer(asian.countries, info, FUN=paste, sep="-")
-x
+str(x)
 x[!lower.tri(x)] #대각선의 아랫부분의 반대만  추출
                  #중복 제거
 
