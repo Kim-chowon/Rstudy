@@ -14,7 +14,7 @@ state.scaled <- scale(state.x77)
 # 군집의 개수를 달리하면서 k평균 군집분석을 반복하여 그 중 가장 의미있는 군집분할을 찾아야 함
 # 또는 함수 이용
 
-install.packages("NbClust")
+# install.packages("NbClust")
 library(NbClust) # 최적의 군집개수를 알려주는 다양한 지표 제공
 
 set.seed(123) # 처음 중심점을 임의로 결정하기 때문에

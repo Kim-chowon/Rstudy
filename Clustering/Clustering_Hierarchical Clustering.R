@@ -7,7 +7,7 @@ head(nutrient)
 # 00. 데이터 전처리 ####
 # 행이름 소문자로 바꾸기
 nutrition <- nutrient
-row.names(nutrition) <- tolower(row.names(nutrition))
+row.names(nutrition) <- toupper(row.names(nutrition))
 head(nutrition)
 
 
@@ -21,6 +21,8 @@ nutrition.scaled <- scale(nutrition)
 # dist()로 생성한 거리행렬을 바탕으로 군집화 작업 수행
 # 우선 식품 간 거리를 계산
 d <- dist(nutrition.scaled)
+?dist
+d
 
 ?hclust # method
 clustering.average <- hclust(d, method="average")
