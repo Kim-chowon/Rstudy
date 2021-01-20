@@ -6,7 +6,7 @@ library(tidyverse)
 head(iris)
 
 ?rpart.control
-my.control <- rpart.control(xval=10, cp=0, minsplit=5)
+my.control <- rpart.control(xval=10, cp=0, minsplit=2)
 # xval=10 과적합을 방지하기 위한 교차검정 k의 수
 # cp=0 (기본세팅)
 # minsplit=5 분할하기 위한 최소 기준 관측치(부모노드)
@@ -31,7 +31,7 @@ printcp(tree.model)
 # CP가 0.02일 때 잘라줘야 함.
 # 최적 cp는 0.02
 
-pruned.model <- prune.rpart(tree.model, cp=0.02)
+pruned.model <- prune.rpart(tree.model, cp=0.01)
 pruned.model %>% rpart.plot
 # 더 간명한 모델.
 # 과적합 문제 방지하고 일반화가능성 높임
@@ -44,6 +44,7 @@ testdata <- data.frame(Petal.Width=c(0.2, 2),
                        Sepal.Width=c(3,4),
                        Sepal.Length=c(5,6))
 predict(pruned.model, newdata=testdata, type="class")
+
 
 
 #### Random Forest ####
@@ -63,8 +64,9 @@ set.seed(567)
 train <- sample(nrow(bc), 0.7*nrow(bc))
 bc.train <- bc[train,]
 bc.test <- bc[-train,]
+sum(is.na(bc) == 1)
 
-install.packages("randomForest")
+# install.packages("randomForest")
 library(randomForest)
 set.seed(123)
 bc.forest <- randomForest(Class ~.,
@@ -81,5 +83,11 @@ bc.forest
 bc.forest.pred <- predict(bc.forest,
                           newdata=bc.test,
                           type="prob")
-
 head(bc.forest.pred)
+
+bc.forest.pred <- predict(bc.forest,
+                          newdata=bc.test,
+                          type="response")
+
+
+table(bc.forest.pred$Class, bc.forest.pred)
