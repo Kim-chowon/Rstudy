@@ -17,6 +17,7 @@ ggplot(iris.sub, aes(x=Sepal.Length, y=Sepal.Width)) +
              size=2)
 # 선형적 분할이 가능하겠구나
 
+
 # 초평면과 서포트벡터를 찾아보자
 install.packages("e1071")
 library(e1071)
@@ -163,6 +164,7 @@ table(aff.test$affairs)
 # svm분석 시행
 library(e1071)
 set.seed(123)
+??svm
 aff.svm <- svm(affairs ~ ., # 결과변수 ~ 예측변수
                data = aff.train)
 summary(aff.svm)
@@ -236,7 +238,7 @@ iris.svm <- svm(Species ~ .,
 summary(iris.svm) # 45개의 서포트벡터
 
 library(ggplot2)
-iris.mds <- data.frame(cmdscale(dist(iris.train[,-5])))
+iris.mds <- data.frame(cmdscale(dist(iris.train[,-5]))) # 다차원척도법으로 2차원으로 바꿔줌
 ggplot(iris.mds, aes(x=X1, y=X2)) +
   geom_point(aes(color=iris.train[,5],
                  shape=iris.train[,5], size=2)) +
