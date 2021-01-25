@@ -136,7 +136,7 @@ mean(iris.sub$Species == iris.svm2.pred)
 #### 예제 2 ####
 # 결혼생활 동안 외도 여부 예측해보자 
 
-install.packages("AER")
+# install.packages("AER")
 library(AER)
 data("Affairs")
 str(Affairs) # 결혼생활 데이터
@@ -153,7 +153,7 @@ prop.table(table(aff$affairs))
 
 # 훈련데이터/테스트데이터 나누기
 set.seed(123)
-?sample
+
 train <- sample(nrow(aff), 0.7*nrow(aff))
 aff.train <- aff[train, ]
 aff.test <- aff[-train, ]
