@@ -17,8 +17,8 @@ read_delim(delim="\t",   # 타입과 텍스트는 탭으로 구분
            col_types=cols("f", "c"),     # 첫번째 열은 메시지의 유형이니까 factor로 읽어라
                                          # 두번째 열은 메시지니까 charactor로 읽어라
            col_names=c("type", "text")) -> sms  # 열이름
-?read_delim
-# 임의의 구분자로 된 파일을 읽는다
+
+?read_delim # 임의의 구분자로 된 파일을 읽는다
 sms
 
 table(sms$type)
@@ -34,16 +34,26 @@ library(tm)
 
 library(dplyr)
 library(tibble)
-
+?select
 sms <- sms %>% 
-  select(text, type) %>% # 위치조정
+  dplyr::select(text, type) %>% # 위치조정
   add_column(doc_id=1:nrow(.), .before=1) %>%  # 열 새로 만들고, 기존데이터의 맨 앞으로 
   mutate(text=iconv(text, to="ascii", sub="")) # 모든 텍스트를 아스키 코드로 바꿈으로써 혹시 있을 문자깨짐현상을 방지
                                                # sub="" : 아스키코드로 안바뀌는 문자는 삭제해라
 sms
 
-docs <- VCorpus(DataframeSource(sms))
-docs
+# 다이아몬드 연산자! 할당까지 한번에 
+library(magrittr)
+sms %<>%  
+  dplyr::select(text, type) %>% # 위치조정
+  add_column(doc_id=1:nrow(.), .before=1) %>%  # 열 새로 만들고, 기존데이터의 맨 앞으로 
+  mutate(text=iconv(text, to="ascii", sub="")) # 모든 텍스트를 아스키 코드로 바꿈으로써 혹시 있을 문자깨짐현상을 방지
+# sub="" : 아스키코드로 안바뀌는 문자는 삭제해라
+sms
+
+
+sms.copus <- VCorpus(DataframeSource(sms))
+sms.copus
 
 lapply(docs, content)
 lapply(docs, content)[c(13,16,20)]
@@ -60,7 +70,7 @@ mystopwords <- c(stopwords("en"),
 toSpace <- content_transformer(function(x, pattern)
   {return(gsub(pattern, " ", x))})
 
-docs <- docs %>% 
+docs %<>%
   tm_map(content_transformer(tolower)) %>% 
   tm_map(myRemove, "(f|ht)tp\\S+\\s*") %>% 
   tm_map(myRemove, "www\\.+\\S+") %>% 
@@ -95,7 +105,7 @@ as.matrix(dtm) %>%
 termFreq
 str(termFreq)
 
-order(termFreq, decreasing=T)
+order(termFreq, decreasing=T)[1:5]
 
 findFreqTerms(dtm, lowfreq=200) # 200번 이상 출현 단어
 
@@ -124,7 +134,7 @@ wordcloud(words=names(termFreq), freq=termFreq,
 # 왜? 빈번하게 출현하는 단어가 다르면, 이거를 분류에 이용할 수 있으니까
 # 비교를 위한 워드클라우드 : comparison.cloud()
 ??comparison.cloud
-# 행에는 단어, 열에는 범주, 셀값은 출현빈도를 나타내는 매트릭스가 필요함
+# 행에는 단어, 열에는 범주(문서), 셀값은 출현빈도를 나타내는 매트릭스가 필요함
 dtm
 as.matrix(dtm) -> hamspam
 hamspam
@@ -155,11 +165,11 @@ t(hamspam) %>%
 
 
 #### 예측모델 개발 - 나이브베이즈 ####
-# 예측변수는 문서로부터 추출한 단어
-# 결과변수는 스팸/햄
+# 예측변수는 문서로부터 추출한 단어(범주형으로 변환 필요)
+# 결과변수는 스팸/햄(범주형)
 ?naiveBayes
-# 나이브베이즈 분석을 수행하기 위해서는 예측변수가 행렬이나 데이터프레임형식이어야 하고
-# 결과변수는 팩터형식의 벡터이어야 함.
+# 나이브베이즈 분석을 수행하기 위해서는 예측변수가 범주형 행렬이나 데이터프레임형식이어야 하고
+# 결과변수도 범주형 벡터여야 함.
 
 inspect(dtm) # 지금 예측변수는 문서-용어 행렬에 저장되어 있다.
 sms # 결과변수는 sms$type에 저장되어 있음
@@ -180,6 +190,7 @@ table(y.test) %>% prop.table
 # 나이브베이즈는 일반적으로 범주형 예측변수를 바탕으로 예측모델을 개발
 # 현재 예측변수의 값은 출현빈도이기 때문에 이를 범주형 값으로 변환할 필요
 # 단어가 등장하면 1, 안하면 0으로 바꿔줄 필요가 있음
+# 팩터로 바꿔주는 함수
 toFactor <- function(x) {
   x <- ifelse(x > 0, 1, 0)
   x <- factor(x, level=c(0,1), labels=c("no", "yes"))
@@ -199,6 +210,7 @@ x.test <- sms.dtm[-train, ]
 
 
 # 나이브 베이즈 분석 시행
+# 
 library(e1071)
 sms.nb <- naiveBayes(x=x.train,
                      y=y.train)
@@ -207,3 +219,37 @@ sms.nb.pred <- sms.nb %>%
   predict(newdata=x.test)
 
 table(y.test, sms.nb.pred, dnn=c("Actual", "Predicted"))
+
+
+
+
+
+
+#### ttf로 ####
+library(tidytext)
+
+sms.tt <- sms %>% 
+  unnest_tokens(word, text)
+
+# 전처리 
+# 1.불용어 없애주기 
+# 2.특수문자 없애기
+# 3.숫자없애기
+# 4.어간추출 대신 형태소분석
+# 너무 짧거나 긴 단어, 너무 많이 등장하거나 적게 등장하는 단어 없애주기
+# 4글자~10글자
+# 5번~1000번
+mystopwords <- c(stopwords("en"),
+                 c("can", "cant", "don", "dont", "get", "got", "just", "one", "will"))
+st <- tibble(mystopwords)
+colnames(st) <- "word"
+
+
+sms.tt %<>%
+  filter(word != "\\d+") %>%      # 숫자 없애줘
+  filter(word != "[:pucnt:]") %>% # 특수문자 없애줘
+  anti_join(st) %>%               # 마이 불용어 제거
+  filter(n >= 5 & n <= 1000) %>%  # 너무 많이 또는 적게 등장하는 단어 없애줘
+  filter(nchar(.$word) >= 4 & nchar(.$word) <= 10)  # 글자수 조정
+sms.tt
+
